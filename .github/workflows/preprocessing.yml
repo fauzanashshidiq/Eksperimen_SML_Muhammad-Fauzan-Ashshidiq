@@ -6,9 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   preprocessing:
     runs-on: ubuntu-latest
@@ -35,11 +32,3 @@ jobs:
         with:
           name: heart-failure-preprocessed-dataset
           path: preprocessing/heart_failure_prediction_preprocessing/
-
-      - name: Commit preprocessed dataset
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add preprocessing/heart_failure_prediction_preprocessing/
-          git diff --cached --quiet || git commit -m "chore: update preprocessed dataset"
-          git push
